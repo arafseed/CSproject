@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <title>CSS Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{bootstrap.min.css}" rel="stylesheet">
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: green;
+  height: 70px;
+  padding: 10px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+h2{
+    font-size: 20px;
+    color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 20%;
+  height: 440px; /* only for demonstration, should be removed */
+  background: #ccc;
+  color: white;
+  padding: 20px;
+  background-color: dodgergreen;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 80%;
+  background-color: wheat;
+  height: 440px; /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: green;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+ul li a{
+    list-style-type: none;
+    color: white;
+
+}
+
+ul li{
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+li a{
+    list-style-type: none;
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+    <h2>Birth Certificate System</h2>
+</header>
+
+<section>
+    <nav>
+
+        <ul>
+            <h1>Admin Dasboard</h1>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Add Child information</a></li>
+            <li><a href="#">View Child information</a></li>
+        </ul>
+    </nav>
+
+    <article>
+        <div class="container">
+            <br>
+            <div class="row">
+                <h3>Add Child Information</h3>
+            </div>
+
+            <form th:action="@{/saveChild}" th:object="${childing}"  method="POST">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="registration_no" class="form-label">Registration Number:</label>
+                        <input type="text" th:field="*{r_Number}" formConrolName="registration_no" placeholder="Enter Registration number"
+                               class="form-control" id="registration_no" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="col-md-5">
+                        <label for="child_name" class="form-label">Child's Name:</label>
+                        <input type="text"  th:field="*{name}" placeholder="Enter  Name" formConrolName="child_name"class="form-control" id="child_name" aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-5 mt-4">
+                    <select   class="form-control">
+                        <option>Select gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="child_dob" class="form-label">Date of Birth:</label>
+                    <input type="date"th:field="*{d_Birth}" placeholder="Date of Birth" formConrolName="child_dob" class="form-control" id="child_dob" aria-describedby="emailHelp">
+                </div>
+                </div>
+                <div class="row mb-5">
+                <div class="col-md-5">
+                    <label for="place_birth" class="form-label">Place of Birth:</label>
+                    <input type="text" th:field="*{p_Birth}"placeholder="Enter  Place of Birth" formConrolName="place_birth" class="form-control" id="place_birth" aria-describedby="emailHelp">
+                </div>
+                </div>
+                <div class="row">
+                    <a th:href="@{/list}" type="cancel" class="btn btn-danger col-md-5">Close</a>
+                    &nbsp;
+                    <button type="submit" class="btn btn-info col-md-5">Register Child</button>
+                    </div>
+            </form>
+
+
+
+
+        </div>
+    </article>
+</section>
+
+<footer>
+    <p>Footer</p>
+</footer>
+
+</body>
+</html>
